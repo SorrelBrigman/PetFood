@@ -17,7 +17,6 @@ var promise1 = new Promise(function (resolve, reject){
 //after file loaded, fill dog food chart
 promise1.then(function(data){
   dogfood = data;
-  console.log(dogfood);
   fillDogChart();
 })
 
@@ -35,7 +34,6 @@ var promise2 = new Promise(function (resolve, reject){
 //after file loaded, fill cat food chart
 promise2.then(function(data){
   catfood = data;
-  console.log(catfood);
   fillCatChart();
 })
 
