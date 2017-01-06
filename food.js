@@ -14,7 +14,7 @@ var promise1 = new Promise(function (resolve, reject){
   })
 })
 
-
+//after file loaded, fill dog food chart
 promise1.then(function(data){
   dogfood = data;
   console.log(dogfood);
@@ -32,7 +32,7 @@ var promise2 = new Promise(function (resolve, reject){
   })
 })
 
-
+//after file loaded, fill cat food chart
 promise2.then(function(data){
   catfood = data;
   console.log(catfood);
@@ -44,6 +44,7 @@ promise2.then(function(data){
 function fillDogChart() {
   var dogFoodHTML = "";
   dogFoodHTML += `<table>`
+  //table header cells
   dogFoodHTML += `<tr><th scope="col">Brand</th>`
   dogFoodHTML += `<th scope="col">Type</th>`
   dogFoodHTML += `<th scope="col">Volume</th>`
@@ -63,7 +64,6 @@ function fillDogChart() {
   }
   //add closing table tag
   dogFoodHTML += `</table>`
-  console.log(dogFoodHTML);
   //add html to element on page
   $(".dogFood").html(dogFoodHTML);
 }
@@ -71,31 +71,39 @@ function fillDogChart() {
 ///function to fill the cat food chart
 function fillCatChart() {
   var catFoodHTML = "";
+  //table header cells
   catFoodHTML += `<table>`
   catFoodHTML += `<tr><th scope="col">Brand</th>`
   catFoodHTML += `<th scope="col">Breeds</th>`
   catFoodHTML += `<th scope="col">Type</th></tr>`
 
   // interate through the object to fill out the table
+
+//list brand of cat food
   for(var i = 0; i < catfood.cat_brands.length; i++) {
     catFoodHTML += `<tr><td>${catfood.cat_brands[i].name}</td><td>`;
+      //put all cat breeds into same table cell
     for (var j = 0; j < catfood.cat_brands[i].breeds.length; j++) {
       catFoodHTML += `${catfood.cat_brands[i].breeds[j]}, `;
     }
+    //close data cell and open the next data cell
     catFoodHTML += `</td><td>`
+    // list the types
     for(var j = 0; j < catfood.cat_brands[i].types.length; j++)  {
         catFoodHTML += `${catfood.cat_brands[i].types[j].type} :`;
+        // list the volumes and corresponding prices of said type
         for(var k = 0; k < catfood.cat_brands[i].types[j].volumes.length; k++) {
           catFoodHTML += ` ${catfood.cat_brands[i].types[j].volumes[k].name} -`;
          catFoodHTML += `$${catfood.cat_brands[i].types[j].volumes[k].price}, `;
         }
       }
+      //close data cell of types, volumes and prices, also close row for that brand
       catFoodHTML += `</td></tr>`;
 
   }
   //add closing table tag
   catFoodHTML += `</table>`
-  console.log(catFoodHTML);
+
   //add html to element on page
   $(".catFood").html(catFoodHTML);
 }
